@@ -142,13 +142,6 @@
             overflow: hidden;
         }
 
-        .cyber-btn:hover {
-            color: #030712;
-            background: var(--neon-cyan);
-            box-shadow: 0 0 25px var(--neon-cyan);
-            transform: translateY(-2px);
-        }
-
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -280,6 +273,71 @@
 
         ul { margin: 0; padding-left: 20px; font-size: 0.95rem; }
         li { margin-bottom: 8px; line-height: 1.6; }
+
+        /* ======================================================= */
+        /* PREMIUM INTERACTIVE MOUSE-HOVER EFFECTS MODULE         */
+        /* ======================================================= */
+        .panel, .cyber-btn, .skill-card {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.3s ease;
+        }
+
+        /* Interactive Dynamic Panel Pop */
+        .panel:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: var(--neon-cyan) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
+                        0 0 30px rgba(0, 240, 255, 0.2);
+        }
+
+        /* Glow Light-Speed Slide Effect on Buttons */
+        .cyber-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%; height: 100%;
+            top: 0; left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
+            transition: none;
+        }
+
+        .cyber-btn:hover {
+            color: #030712;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 25px var(--neon-cyan);
+            transform: translateY(-2px);
+        }
+
+        .cyber-btn:hover::after {
+            left: 100%;
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* Command Center Structural Skill-Card Glow */
+        .skill-card:hover {
+            border-color: var(--neon-green);
+            background: rgba(57, 255, 20, 0.03);
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.1);
+        }
+
+        /* Sci-Fi Interface Glitch Animation on Main Header Text */
+        .header-title:hover {
+            animation: miniGlitch 0.3s linear infinite;
+            color: #fff;
+            text-shadow: -2px -2px 0 var(--neon-cyan), 2px 2px 0 var(--neon-purple);
+        }
+
+        @keyframes miniGlitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-1px, 1px) }
+            40% { transform: translate(-1px, -1px) }
+            60% { transform: translate(1px, 1px) }
+            80% { transform: translate(1px, -1px) }
+            100% { transform: translate(0) }
+        }
     </style>
 </head>
 <body>
