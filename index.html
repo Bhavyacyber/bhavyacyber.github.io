@@ -3,474 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhavya Parvathi | Cyber Security Operations Center</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Orbitron:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <title>Bhavya Parvathi | Cybersecurity Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #030712;
-            --panel-glass: rgba(10, 15, 30, 0.75);
-            --neon-cyan: #00f0ff;
-            --neon-green: #39ff14;
-            --neon-purple: #9d4edd;
-            --neon-amber: #ffaa00;
-            --matrix-glow: rgba(0, 240, 255, 0.15);
-            --text-bright: #f8fafc;
-            --text-normal: #cbd5e1;
-            --text-dim: #64748b;
+            --bg: #0f172a;
+            --surface: rgba(15, 23, 42, 0.92);
+            --surface-strong: rgba(15, 23, 42, 0.98);
+            --border: rgba(148, 163, 184, 0.18);
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.16);
+            --accent-strong: #0ea5e9;
+            --shadow: 0 24px 80px rgba(15, 23, 42, 0.24);
         }
 
-        * {
+        *, *::before, *::after {
             box-sizing: border-box;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-normal);
-            font-family: 'Fira Code', monospace;
             margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.12), transparent 32%),
+                        linear-gradient(180deg, #020617 0%, #0f172a 100%);
         }
 
         body::before {
-            content: " ";
-            display: block;
+            content: '';
             position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
-            z-index: 9999;
-            background-size: 100% 4px;
+            inset: 0;
+            background-image: radial-gradient(circle at 20% 10%, rgba(56, 189, 248, 0.12), transparent 35%),
+                              radial-gradient(circle at 80% 85%, rgba(16, 185, 129, 0.1), transparent 30%);
             pointer-events: none;
-            opacity: 0.6;
         }
 
-        .laser-sweep {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(to right, transparent, var(--neon-cyan), transparent);
-            box-shadow: 0 0 12px var(--neon-cyan);
-            opacity: 0.4;
-            animation: sweep 8s linear infinite;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        @keyframes sweep {
-            0% { top: -5%; }
-            100% { top: 105%; }
-        }
-
-        .container {
-            max-width: 1250px;
+        .page {
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 50px 20px;
-        }
-
-        header {
-            background: var(--panel-glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 240, 255, 0.25);
-            border-top: 4px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 20px var(--matrix-glow);
+            padding: 40px 24px 64px;
             position: relative;
+            z-index: 1;
         }
 
-        .header-nodes {
-            position: absolute;
-            top: 10px; right: 15px;
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-        }
-
-        .header-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--text-bright);
-            text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
-            margin: 0;
-            letter-spacing: 3px;
-        }
-
-        .header-subtitle {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            color: var(--neon-green);
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin: 10px 0 25px 0;
-            text-transform: uppercase;
-        }
-
-        .profile-summary {
-            color: var(--text-normal);
-            max-width: 900px;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        .links-container {
-            margin-top: 30px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .cyber-btn {
-            background: rgba(0, 240, 255, 0.03);
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            padding: 12px 24px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dashboard-grid {
+        .hero {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 28px;
+            padding: 36px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
         }
 
-        @media (max-width: 950px) {
-            .dashboard-grid { grid-template-columns: 1fr; }
-        }
-
-        .panel {
-            background: var(--panel-glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-left: 4px solid var(--neon-purple);
-            border-radius: 6px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .panel.cyan-panel { border-left-color: var(--neon-cyan); }
-        .panel.green-panel { border-left-color: var(--neon-green); }
-        .panel.amber-panel { border-left-color: var(--neon-amber); }
-
-        .panel-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 0;
-            margin-bottom: 30px;
+        .hero-header {
             display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
             align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-title {
+            font-size: clamp(2.6rem, 4vw, 4rem);
+            line-height: 1;
+            letter-spacing: -0.04em;
+            margin: 0;
+        }
+
+        .hero-subtitle {
+            margin: 0;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-size: 0.88rem;
+        }
+
+        .hero-copy {
+            max-width: 760px;
+            line-height: 1.9;
+            color: var(--muted);
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
             gap: 12px;
         }
 
-        .panel.cyan-panel .panel-title { color: var(--neon-cyan); }
-        .panel.green-panel .panel-title { color: var(--neon-green); }
-        .panel.amber-panel .panel-title { color: var(--neon-amber); }
-        .panel .panel-title { color: var(--neon-purple); }
-
-        .skill-matrix-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 650px) {
-            .skill-matrix-grid { grid-template-columns: 1fr; }
-        }
-
-        .skill-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 4px;
-            padding: 18px;
-        }
-
-        .skill-group-title {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            color: var(--text-bright);
-            margin-bottom: 12px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-        }
-
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .cyber-tag {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text-normal);
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-        }
-
-        .cyber-tag:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-        }
-
-        .timeline-item {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 25px;
-            margin-bottom: 25px;
-        }
-
-        .timeline-item:last-child { border: none; padding-bottom: 0; margin-bottom: 0; }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             gap: 10px;
-            margin-bottom: 10px;
+            padding: 14px 22px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
         }
 
-        .item-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-bright); margin: 0; }
-        
-        .item-meta {
-            font-size: 0.8rem; color: var(--neon-green); font-weight: bold;
-            background: rgba(57, 255, 20, 0.1); padding: 3px 8px; border-radius: 3px;
+        .button-primary {
+            color: #0f172a;
+            background: linear-gradient(135deg, #38bdf8, #22d3ee);
+            box-shadow: 0 18px 45px rgba(56, 189, 248, 0.22);
         }
 
-        .item-sub { font-size: 0.9rem; color: var(--neon-cyan); margin: 4px 0 12px 0; }
-
-        .placeholder-box {
-            background: rgba(255, 170, 0, 0.02);
-            border: 1px dashed rgba(255, 170, 0, 0.25);
-            border-radius: 4px;
-            padding: 20px;
-            color: var(--neon-amber);
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            margin-top: 15px;
+        .button-secondary {
+            color: var(--text);
+            background: rgba(148, 163, 184, 0.12);
+            border-color: rgba(148, 163, 184, 0.24);
         }
 
-        ul { margin: 0; padding-left: 20px; font-size: 0.95rem; }
-        li { margin-bottom: 8px; line-height: 1.6; }
-
-        /* ======================================================= */
-        /* PREMIUM INTERACTIVE MOUSE-HOVER EFFECTS MODULE         */
-        /* ======================================================= */
-        .panel, .cyber-btn, .skill-card {
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        border-color 0.3s ease;
-        }
-
-        /* Interactive Dynamic Panel Pop */
-        .panel:hover {
-            transform: translateY(-6px) scale(1.01);
-            border-color: var(--neon-cyan) !important;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
-                        0 0 30px rgba(0, 240, 255, 0.2);
-        }
-
-        /* Glow Light-Speed Slide Effect on Buttons */
-        .cyber-btn::after {
-            content: '';
-            position: absolute;
-            width: 100%; height: 100%;
-            top: 0; left: -100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
-            transition: none;
-        }
-
-        .cyber-btn:hover {
-            color: #030712;
-            background: var(--neon-cyan);
-            box-shadow: 0 0 25px var(--neon-cyan);
+        .button:hover {
             transform: translateY(-2px);
         }
 
-        .cyber-btn:hover::after {
-            left: 100%;
-            transition: all 0.6s ease-in-out;
+        .grid {
+            display: grid;
+            gap: 26px;
+            margin-top: 42px;
         }
 
-        /* Command Center Structural Skill-Card Glow */
-        .skill-card:hover {
-            border-color: var(--neon-green);
-            background: rgba(57, 255, 20, 0.03);
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.1);
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: var(--shadow);
         }
 
-        /* Sci-Fi Interface Glitch Animation on Main Header Text */
-        .header-title:hover {
-            animation: miniGlitch 0.3s linear infinite;
-            color: #fff;
-            text-shadow: -2px -2px 0 var(--neon-cyan), 2px 2px 0 var(--neon-purple);
+        .section-title {
+            margin-top: 0;
+            margin-bottom: 22px;
+            font-size: 1.1rem;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 700;
         }
 
-        @keyframes miniGlitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-1px, 1px) }
-            40% { transform: translate(-1px, -1px) }
-            60% { transform: translate(1px, 1px) }
-            80% { transform: translate(1px, -1px) }
-            100% { transform: translate(0) }
+        .card-list {
+            display: grid;
+            gap: 18px;
+        }
+
+        .card {
+            padding: 24px;
+            border-radius: 18px;
+            background: rgba(15, 23, 42, 0.84);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .card-title {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .card-meta {
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-bottom: 14px;
+        }
+
+        .card-body {
+            color: var(--muted);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .pill {
+            display: inline-flex;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .skill-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .skill-list li,
+        .cert-list li {
+            background: rgba(148, 163, 184, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 14px;
+            padding: 14px 16px;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .cert-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .cert-list strong {
+            display: block;
+            color: var(--text);
+            font-size: 0.98rem;
+        }
+
+        .cert-list span {
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .highlight-card {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), rgba(16, 185, 129, 0.09));
+            border: 1px solid rgba(56, 189, 248, 0.18);
+        }
+
+        .highlight-card p {
+            margin: 0;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 860px) {
+            .cards-grid,
+            .skill-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .hero {
+                padding: 28px;
+            }
+
+            .hero-header {
+                align-items: flex-start;
+            }
+
+            .hero-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
         }
     </style>
 </head>
 <body>
-
-<div class="laser-sweep"></div>
-
-<div class="container">
-    
-    <header>
-        <div class="header-nodes">SEC_NODE // LIVE_PORTFOLIO</div>
-        <div class="header-title">BHAVYA PARVATHI</div>
-        <div class="header-subtitle">// CYBERSECURITY Professional & BLUE TEAM RESEARCHER</div>
-        <p class="profile-summary">
-            Cybersecurity professional and researcher with hands-on SOC fundamentals - log analysis, threat detection, SIEM, and phishing investigation. ISC2 CC certified; CAISR (Certified AI Security & Risk) certified with applied exposure to AI-assisted cybersecurity matrices. Backed by an M.Tech engineering background, looking to break into entry-level SOC Analyst, Blue Team, GRC, and AppSec operations.
-        </p>
-        <div class="links-container">
-            <a href="mailto:bhavyanagasai@gmail.com" class="cyber-btn">⚡ CONTACT_EMAIL</a>
-            <a href="https://linkedin.com/in/bhavyaparvathi" target="_blank" class="cyber-btn">⚡ LINKEDIN_NET</a>
-            <a href="https://github.com/Bhavyacyber" target="_blank" class="cyber-btn">⚡ GITHUB_NODE</a>
-        </div>
-    </header>
-
-    <div class="dashboard-grid">
-        
-        <div>
-            <div class="panel cyan-panel">
-                <div class="panel-title">📡 [MODULE_01]: CORE_OPERATIONAL_LOGS</div>
-                <div class="timeline-item">
-                    <div class="item-header">
-                        <h3 class="item-title">Cybersecurity Architecture Research Intern</h3>
-                        <span class="item-meta">JUN 2026 - PRESENT</span>
-                    </div>
-                    <div class="item-sub">iTelematics Software Pvt Ltd (EV.ENGINEER™) | Aerospace, Defence, & EV Sectors</div>
-                    <ul>
-                        <li>Contributing to active R&D surrounding battery cybersecurity components, threat modelling schemas, and vulnerability assessments for the Battery Intelligence Platform and Battery Aadhaar frameworks.</li>
-                        <li>Structuring detailed secure software development engineering telemetry blueprints and technical specifications.</li>
-                    </ul>
+    <div class="page">
+        <section class="hero">
+            <div class="hero-header">
+                <div>
+                    <h1 class="hero-title">Bhavya Parvathi</h1>
+                    <p class="hero-subtitle">Cybersecurity Professional & Blue Team Researcher</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="item-header">
-                        <h3 class="item-title">Cybersecurity Intern</h3>
-                        <span class="item-meta">2025 (1 MONTH)</span>
-                    </div>
-                    <div class="item-sub">Redynox | Offensive Research Laboratory</div>
-                    <ul>
-                        <li>Deployed localized OWASP WebGoat sandboxes to thoroughly test SQLi, XSS, and CSRF vectors, compiling strict proofs-of-concept mapped directly to OWASP Top 10 vulnerabilities.</li>
-                        <li>Built isolated multi-node VirtualBox network clusters utilizing Ubuntu and Kali configurations; parsed live traffic packet streams within Wireshark while enforcing firewall rule sets via iptables and UFW mechanisms.</li>
-                        <li>Translated raw machine log captures and indicators into structured, audit-ready compliance analysis documentation ready for administrative stakeholder review.</li>
-                    </ul>
-                </div>
+                <span class="pill">SOC Analyst | AppSec | GRC</span>
             </div>
 
-            <div class="panel amber-panel">
-                <div class="panel-title">🎛️ [MODULE_02]: HOME_LABS_&_INFRASTRUCTURE</div>
-                <p>Detailed network topology drawings, server configurations, and monitoring capabilities deployed locally for threat simulation environments.</p>
-                <div class="placeholder-box">
-                    ⚠️ [STATUS: PENDING_DECRYPTION] // LINKED_NODE: home_lab_schematics.cfg<br>
-                    >> Initializing Active Directory Sandbox, Splunk Enterprise Forwarder nodes, and PFSense firewall deployment documentation... Coming soon.
-                </div>
-            </div>
+            <p class="hero-copy">
+                I build secure systems with a practical understanding of SOC operations, threat detection, log analysis, and vulnerability assessment. With an M.Tech background and certifications like CAISR and ISC2 Cybersecurity, I bring disciplined research, incident response mindset, and a hands-on approach to defending digital infrastructure.
+            </p>
 
-            <div class="panel cyan-panel">
-                <div class="panel-title">🔬 [MODULE_03]: DETAILED_VAPT_WALKTHROUGHS</div>
-                <div class="timeline-item">
-                    <div class="item-header">
-                        <h3 class="item-title">REST API & Web Application Vulnerability Map</h3>
-                        <span class="item-meta">LAB EXPERIMENT</span>
-                    </div>
-                    <ul>
-                        <li>Executed rigorous black-box evaluations across target REST web engines tracking OWASP API Top 10 guidelines.</li>
-                        <li>Identified and reported 5 distinct structural anomalies including BOLA flaws and custom data validation input errors (2 calculated as High Severity metrics under active CVSS frameworks).</li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="item-header">
-                        <h3 class="item-title">OWASP Juice Shop Complete Structural Assessment</h3>
-                        <span class="item-meta">SANDBOX EVALUATION</span>
-                    </div>
-                    <ul>
-                        <li>Exploited authentication bypass sequences, IDOR parameters causing horizontal escalation chains, and injected obfuscated payloads defeating client filters to execute DOM XSS.</li>
-                        <li>Compiled formal security testing assessment summaries explaining root vulnerabilities and technical configurations for defense mitigation.</li>
-                    </ul>
-                </div>
-                <div class="placeholder-box" style="margin-top:20px;">
-                    ⚡ [NEXT WRITEUP QUEUED]: Deconstructing Wallarm API Security & Postman Automation Pipelines... Coming soon.
-                </div>
+            <div class="hero-actions">
+                <a class="button button-primary" href="mailto:bhavyanagasai@gmail.com">Contact Email</a>
+                <a class="button button-secondary" href="https://linkedin.com/in/bhavyaparvathi" target="_blank">LinkedIn</a>
+                <a class="button button-secondary" href="https://github.com/Bhavyacyber" target="_blank">GitHub</a>
             </div>
-        </div>
+        </section>
 
-        <div>
-            <div class="panel">
-                <div class="panel-title">🛡️ [MODULE_04]: CERTIFICATIONS</div>
-                <ul style="list-style-type: '🚀 '; padding-left: 15px;">
-                    <li style="margin-bottom: 15px;"><strong style="color:#fff;">CAISR</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Certified AI Security & Risk (2026)</span></li>
-                    <li style="margin-bottom: 15px;"><strong style="color:#fff;">API Security Associate</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Wallarm Protection Engine (2026)</span></li>
-                    <li style="margin-bottom: 15px;"><strong style="color:#fff;">DPDPA 2023</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Data Privacy Framework (2026)</span></li>
-                    <li style="margin-bottom: 15px;"><strong style="color:#fff;">Certified in Cybersecurity</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">ISC2 Global Credentials (2025)</span></li>
-                    <li style="margin-bottom: 15px;"><strong style="color:#fff;">Google Cyber Professional</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Security Analyst Core (2025)</span></li>
-                    <li style="margin-bottom: 15px;"><strong style="color:var(--text-dim);">CEH (Ethical Hacker)</strong><br><span style="font-size:0.8rem; color:var(--text-dim);">EC-Council (In Progress)</span></li>
+        <div class="grid">
+            <section class="section">
+                <h2 class="section-title">Experience</h2>
+                <div class="card-list">
+                    <article class="card">
+                        <h3 class="card-title">Cybersecurity Architecture Research Intern</h3>
+                        <p class="card-meta">iTelematics Software Pvt Ltd • Jun 2026 - Present</p>
+                        <p class="card-body">Working across aerospace, defence, and EV domains to improve battery cybersecurity and threat modeling. I document secure software telemetry, build attack surface maps, and support vulnerability analysis for mission-critical infrastructure.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card-title">Cybersecurity Intern</h3>
+                        <p class="card-meta">Redynox • 2025</p>
+                        <p class="card-body">Executed OWASP WebGoat assessments, built Ubuntu/Kali sandbox networks, and analyzed packet captures in Wireshark. I translated technical findings into audit-ready reports for compliance and defensive engineering.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section highlight-card">
+                <h2 class="section-title">Certifications</h2>
+                <ul class="cert-list">
+                    <li><strong>CAISR</strong><span>Certified AI Security & Risk • 2026</span></li>
+                    <li><strong>API Security Associate</strong><span>Wallarm Protection Engine • 2026</span></li>
+                    <li><strong>DPDPA 2023</strong><span>Data Privacy Framework • 2026</span></li>
+                    <li><strong>Certified in Cybersecurity</strong><span>ISC2 Global • 2025</span></li>
+                    <li><strong>Google Cyber Professional</strong><span>Security Analyst Core • 2025</span></li>
+                    <li><strong>CEH (Ethical Hacker)</strong><span>EC-Council • In progress</span></li>
                 </ul>
-            </div>
+            </section>
 
-            <div class="panel amber-panel">
-                <div class="panel-title">🕹️ [MODULE_05]: GAMIFIED_METRICS</div>
-                <p>Live rankings and metrics across competitive industry capture-the-flag vectors.</p>
-                <div class="placeholder-box" style="border-color: rgba(255,170,0,0.4);">
-                    [📡 CONNECTING TO TRYHACKME API...]<br>
-                    >> Target Node: TryHackMe Badges & Rank Displays<br>
-                    >> Target Node: HackTheBox Profile Verification Matrices<br>
-                    Status: Awaiting profile link synchronization... Coming soon.
+            <section class="section">
+                <h2 class="section-title">Labs & Projects</h2>
+                <div class="card-list">
+                    <article class="card">
+                        <h3 class="card-title">Home Lab Infrastructure</h3>
+                        <p class="card-body">Designing secure test environments with Active Directory sandboxes, Splunk forwarding, and pfSense perimeter controls. Documentation and infrastructure automation are prioritized for repeatable threat simulations.</p>
+                    </article>
+                    <article class="card">
+                        <h3 class="card-title">Vulnerability Assessment Walkthroughs</h3>
+                        <p class="card-body">Assessing REST APIs and OWASP Juice Shop for BOLA, IDOR, SQLi, XSS, and CSRF flaws. I turn findings into remediation-focused analysis and technical reports.</p>
+                    </article>
                 </div>
-            </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Skills</h2>
+                <ul class="skill-list">
+                    <li>Splunk / SIEM</li>
+                    <li>Log Analysis</li>
+                    <li>Incident Response</li>
+                    <li>Threat Detection</li>
+                    <li>Burp Suite</li>
+                    <li>OWASP ZAP</li>
+                    <li>API Security</li>
+                    <li>VAPT & Pentesting</li>
+                </ul>
+            </section>
         </div>
     </div>
-
-    <div class="panel green-panel">
-        <div class="panel-title">⚔️ [MODULE_06]: TECHNICAL_VECTOR_SKILLS</div>
-        <div class="skill-matrix-grid">
-            <div class="skill-card">
-                <div class="skill-group-title">> SOC OPERATIONS & THREAT TRIAGE</div>
-                <div class="tags-container">
-                    <span class="cyber-tag">Splunk (SIEM)</span><span class="cyber-tag">Log Analysis</span><span class="cyber-tag">Incident Response</span><span class="cyber-tag">Threat Detection</span><span class="cyber-tag">Phishing Investigation</span><span class="cyber-tag">VirusTotal IOCs</span>
-                </div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-group-title">> APPSEC & API PENETRATION TESTING</div>
-                <div class="tags-container">
-                    <span class="cyber-tag">Burp Suite</span><span class="cyber-tag">OWASP ZAP</span><span class="cyber-tag">OWASP Top 10</span><span class="cyber-tag">BOLA Vectors</span><span class="cyber-tag">IDOR</span><span class="cyber-tag">SQLi / XSS / CSRF</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
 </body>
 </html>
