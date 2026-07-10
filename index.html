@@ -7,16 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0f172a;
-            --surface: rgba(15, 23, 42, 0.92);
-            --surface-strong: rgba(15, 23, 42, 0.98);
+            --bg: #0b1220;
+            --surface: rgba(15, 23, 42, 0.88);
+            --surface-strong: rgba(10, 14, 28, 0.98);
             --border: rgba(148, 163, 184, 0.18);
-            --text: #e2e8f0;
-            --muted: #94a3b8;
-            --accent: #38bdf8;
-            --accent-soft: rgba(56, 189, 248, 0.16);
-            --accent-strong: #0ea5e9;
-            --shadow: 0 24px 80px rgba(15, 23, 42, 0.24);
+            --text: #eef2ff;
+            --muted: #a5b4fc;
+            --accent: #60a5fa;
+            --accent-soft: rgba(96, 165, 250, 0.18);
+            --accent-strong: #38bdf8;
+            --accent-glow: #8b5cf6;
+            --shadow: 0 28px 90px rgba(7, 10, 24, 0.28);
         }
 
         *, *::before, *::after {
@@ -55,12 +56,20 @@
 
         .hero {
             display: grid;
-            gap: 28px;
-            padding: 36px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 28px;
+            grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+            gap: 42px;
+            padding: 44px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid rgba(96, 165, 250, 0.12);
+            border-radius: 36px;
             box-shadow: var(--shadow);
+            transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+        }
+
+        .hero:hover {
+            transform: translateY(-1px);
+            border-color: rgba(96, 165, 250, 0.18);
+            background: rgba(15, 23, 42, 0.98);
         }
 
         .hero-header {
@@ -71,6 +80,89 @@
             justify-content: space-between;
         }
 
+        .hero-image-panel {
+            position: relative;
+            min-height: 420px;
+            border-radius: 28px;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(12, 18, 34, 0.98), rgba(15, 23, 42, 0.96));
+            border: 1px solid rgba(96, 165, 250, 0.12);
+            box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.05);
+        }
+
+        .hero-image-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 15% 15%, rgba(96, 165, 250, 0.1), transparent 20%);
+            pointer-events: none;
+        }
+
+        .hero-image-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: saturate(1.05) brightness(0.96);
+            transition: transform 0.35s ease, filter 0.35s ease;
+        }
+
+        .hero-image-panel:hover .hero-image {
+            transform: scale(1.02);
+            filter: saturate(1.12) brightness(1);
+        }
+
+        .hero-chip {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.86);
+            color: var(--accent);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            border: 1px solid rgba(96, 165, 250, 0.16);
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .hero-copy {
+            max-width: 640px;
+            line-height: 2.15;
+            color: var(--muted);
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .hero-actions .button {
+            min-width: 140px;
+            padding: 14px 24px;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0) scale(1); }
+            to { transform: translateY(-10px) scale(1.005); }
+        }
+
         .hero-title {
             font-size: clamp(2.6rem, 4vw, 4rem);
             line-height: 1;
@@ -79,7 +171,7 @@
         }
 
         .hero-subtitle {
-            margin: 0;
+            margin: 12px 0 0;
             color: var(--accent);
             font-weight: 600;
             letter-spacing: 0.2em;
@@ -112,7 +204,7 @@
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
         }
 
         .button-primary {
@@ -129,12 +221,68 @@
 
         .button:hover {
             transform: translateY(-2px);
+            box-shadow: 0 18px 36px rgba(56, 189, 248, 0.22);
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            color: #fff;
         }
 
-        .grid {
+        .hero:hover {
+            transform: translateY(-3px);
+        }
+
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.35);
+            box-shadow: 0 28px 90px rgba(15, 23, 42, 0.28);
+            background: rgba(15, 23, 42, 0.98);
+        }
+
+        .card {
+            padding: 24px;
+            border-radius: 18px;
+            background: rgba(15, 23, 42, 0.84);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(139, 92, 246, 0.28);
+            box-shadow: 0 22px 54px rgba(56, 189, 248, 0.16);
+            background: rgba(15, 23, 42, 0.98);
+        }
+
+        .skill-list li:hover,
+        .cert-list li:hover {
+            background: rgba(139, 92, 246, 0.14);
+            border-color: rgba(139, 92, 246, 0.24);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+        }
+
+        .skill-list li,
+        .cert-list li {
+            background: rgba(148, 163, 184, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 14px;
+            padding: 14px 16px;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .cards-grid {
             display: grid;
-            gap: 26px;
-            margin-top: 42px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
         }
 
         .section {
@@ -279,25 +427,33 @@
 <body>
     <div class="page">
         <section class="hero">
-            <div class="hero-header">
-                <div>
-                    <h1 class="hero-title">Bhavya Parvathi</h1>
-                    <p class="hero-subtitle">Cybersecurity Professional & Blue Team Researcher</p>
+            <div>
+                <div class="hero-header">
+                    <div>
+                        <h1 class="hero-title">Bhavya Parvathi</h1>
+                        <p class="hero-subtitle">Cybersecurity Professional & Blue Team Researcher</p>
+                    </div>
+                    <span class="pill">SOC Analyst | AppSec | GRC</span>
                 </div>
-                <span class="pill">SOC Analyst | AppSec | GRC</span>
+
+                <p class="hero-copy">
+                    I build secure systems with a practical understanding of SOC operations, threat detection, log analysis, and vulnerability assessment. With an M.Tech background and certifications like CAISR and ISC2 Cybersecurity, I bring disciplined research, incident response mindset, and a hands-on approach to defending digital infrastructure.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button button-primary" href="mailto:bhavyanagasai@gmail.com">Contact Email</a>
+                    <a class="button button-secondary" href="https://linkedin.com/in/bhavyaparvathi" target="_blank">LinkedIn</a>
+                    <a class="button button-secondary" href="https://github.com/Bhavyacyber" target="_blank">GitHub</a>
+                </div>
             </div>
 
-            <p class="hero-copy">
-                I build secure systems with a practical understanding of SOC operations, threat detection, log analysis, and vulnerability assessment. With an M.Tech background and certifications like CAISR and ISC2 Cybersecurity, I bring disciplined research, incident response mindset, and a hands-on approach to defending digital infrastructure.
-            </p>
-
-            <div class="hero-actions">
-                <a class="button button-primary" href="mailto:bhavyanagasai@gmail.com">Contact Email</a>
-                <a class="button button-secondary" href="https://linkedin.com/in/bhavyaparvathi" target="_blank">LinkedIn</a>
-                <a class="button button-secondary" href="https://github.com/Bhavyacyber" target="_blank">GitHub</a>
+            <div class="hero-image-panel">
+                <div class="hero-image-frame">
+                    <span class="hero-chip">Analyst View</span>
+                    <img class="hero-image" src="cybersecurity_portfolio_portrait.png" alt="Bhavya Parvathi portrait">
+                </div>
             </div>
         </section>
-
         <div class="grid">
             <section class="section">
                 <h2 class="section-title">Experience</h2>
