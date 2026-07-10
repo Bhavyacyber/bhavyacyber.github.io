@@ -8,10 +8,11 @@
     <style>
         :root {
             --bg-deep: #030712;
-            --panel-glass: rgba(10, 15, 30, 0.7);
+            --panel-glass: rgba(10, 15, 30, 0.75);
             --neon-cyan: #00f0ff;
             --neon-green: #39ff14;
             --neon-purple: #9d4edd;
+            --neon-amber: #ffaa00;
             --matrix-glow: rgba(0, 240, 255, 0.15);
             --text-bright: #f8fafc;
             --text-normal: #cbd5e1;
@@ -36,7 +37,6 @@
             background-size: 40px 40px;
         }
 
-        /* Scanline Overlay Effect */
         body::before {
             content: " ";
             display: block;
@@ -49,7 +49,6 @@
             opacity: 0.6;
         }
 
-        /* Animated Laser Scan Bar */
         .laser-sweep {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 3px;
@@ -72,10 +71,10 @@
             padding: 50px 20px;
         }
 
-        /* Premium Glitch HUD Header */
         header {
             background: var(--panel-glass);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(0, 240, 255, 0.25);
             border-top: 4px solid var(--neon-cyan);
             border-radius: 8px;
@@ -101,12 +100,6 @@
             text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
             margin: 0;
             letter-spacing: 3px;
-            animation: textPulse 4s infinite alternate;
-        }
-
-        @keyframes textPulse {
-            0% { text-shadow: 0 0 8px rgba(0, 240, 255, 0.4); }
-            100% { text-shadow: 0 0 22px rgba(0, 240, 255, 0.8); }
         }
 
         .header-subtitle {
@@ -126,7 +119,6 @@
             line-height: 1.8;
         }
 
-        /* Interactive Cyber Buttons */
         .links-container {
             margin-top: 30px;
             display: flex;
@@ -150,26 +142,13 @@
             overflow: hidden;
         }
 
-        .cyber-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
-            transition: 0.4s;
-        }
-
-        .cyber-btn:hover::before {
-            left: 100%;
-        }
-
         .cyber-btn:hover {
-            color: #000;
+            color: #030712;
             background: var(--neon-cyan);
             box-shadow: 0 0 25px var(--neon-cyan);
             transform: translateY(-2px);
         }
 
-        /* Dashboard Structural Grids */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -184,16 +163,19 @@
         .panel {
             background: var(--panel-glass);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-left: 4px solid var(--neon-purple);
             border-radius: 6px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             position: relative;
+            margin-bottom: 30px;
         }
 
         .panel.cyan-panel { border-left-color: var(--neon-cyan); }
         .panel.green-panel { border-left-color: var(--neon-green); }
+        .panel.amber-panel { border-left-color: var(--neon-amber); }
 
         .panel-title {
             font-family: 'Orbitron', sans-serif;
@@ -208,11 +190,11 @@
             gap: 12px;
         }
 
-        .panel.cyan-panel .panel-title { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0,240,255,0.3); }
-        .panel.green-panel .panel-title { color: var(--neon-green); text-shadow: 0 0 10px rgba(57,255,20,0.3); }
-        .panel .panel-title { color: var(--neon-purple); text-shadow: 0 0 10px rgba(157,78,221,0.3); }
+        .panel.cyan-panel .panel-title { color: var(--neon-cyan); }
+        .panel.green-panel .panel-title { color: var(--neon-green); }
+        .panel.amber-panel .panel-title { color: var(--neon-amber); }
+        .panel .panel-title { color: var(--neon-purple); }
 
-        /* Tactical Skill Group Cards */
         .skill-matrix-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -228,12 +210,6 @@
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 4px;
             padding: 18px;
-        }
-
-        .skill-card:hover {
-            border-color: rgba(57, 255, 20, 0.3);
-            background: rgba(57, 255, 20, 0.01);
-            transform: scale(1.02);
         }
 
         .skill-group-title {
@@ -262,21 +238,16 @@
 
         .cyber-tag:hover {
             border-color: var(--neon-cyan);
-            color: #fff;
             box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-            background: rgba(0, 240, 255, 0.05);
         }
 
-        /* Timeline Items & Core Logs */
         .timeline-item {
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             padding-bottom: 25px;
             margin-bottom: 25px;
         }
 
-        .timeline-item:last-child {
-            border: none; padding-bottom: 0; margin-bottom: 0;
-        }
+        .timeline-item:last-child { border: none; padding-bottom: 0; margin-bottom: 0; }
 
         .item-header {
             display: flex;
@@ -287,75 +258,28 @@
             margin-bottom: 10px;
         }
 
-        .item-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text-bright);
-            margin: 0;
-        }
-
+        .item-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--text-bright); margin: 0; }
+        
         .item-meta {
-            font-size: 0.8rem;
-            color: var(--neon-green);
-            font-weight: bold;
-            background: rgba(57, 255, 20, 0.1);
-            padding: 3px 8px;
-            border-radius: 3px;
-            letter-spacing: 1px;
+            font-size: 0.8rem; color: var(--neon-green); font-weight: bold;
+            background: rgba(57, 255, 20, 0.1); padding: 3px 8px; border-radius: 3px;
         }
 
-        .item-sub {
+        .item-sub { font-size: 0.9rem; color: var(--neon-cyan); margin: 4px 0 12px 0; }
+
+        .placeholder-box {
+            background: rgba(255, 170, 0, 0.02);
+            border: 1px dashed rgba(255, 170, 0, 0.25);
+            border-radius: 4px;
+            padding: 20px;
+            color: var(--neon-amber);
+            font-family: 'Fira Code', monospace;
             font-size: 0.9rem;
-            color: var(--neon-cyan);
-            margin: 4px 0 12px 0;
+            margin-top: 15px;
         }
 
-        ul {
-            margin: 0; padding-left: 20px;
-            font-size: 0.95rem;
-            color: var(--text-normal);
-        }
-
+        ul { margin: 0; padding-left: 20px; font-size: 0.95rem; }
         li { margin-bottom: 8px; line-height: 1.6; }
-
-        /* Threat Intel Feed Block */
-        .blog-card {
-            background: rgba(15, 23, 42, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            padding: 25px;
-            border-radius: 6px;
-            margin-top: 15px;
-        }
-
-        .blog-card:hover {
-            border-color: var(--neon-purple);
-            box-shadow: 0 0 20px rgba(157, 78, 221, 0.2);
-            transform: scale(1.01);
-        }
-
-        .blog-date {
-            font-size: 0.75rem;
-            color: var(--neon-purple);
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .blog-link {
-            color: var(--neon-purple);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            text-decoration: none;
-            font-weight: bold;
-            letter-spacing: 1px;
-            display: inline-block;
-            margin-top: 15px;
-        }
-
-        .blog-link:hover {
-            color: #fff;
-            text-shadow: 0 0 8px var(--neon-purple);
-        }
     </style>
 </head>
 <body>
@@ -364,74 +288,115 @@
 
 <div class="container">
     
-    <!-- CENTRAL HUD SYSTEM HEADER -->
     <header>
         <div class="header-nodes">SEC_NODE // LIVE_PORTFOLIO</div>
         <div class="header-title">BHAVYA PARVATHI</div>
-        <div class="header-subtitle">// CYBERSECURITY PROFESSIONAL & BLUE TEAM RESEARCHER</div>
+        <div class="header-subtitle">// CYBERSECURITY Professional & BLUE TEAM RESEARCHER</div>
         <p class="profile-summary">
-            Cybersecurity professional and researcher with hands-on SOC fundamentals - log analysis, threat detection, SIEM, and phishing investigation[cite: 1]. ISC2 CC certified; CAISR (Certified AI Security & Risk) certified with applied exposure to AI-assisted cybersecurity matrices[cite: 1]. Backed by an M.Tech analytics background, exploring entry-level SOC Analyst, Blue Team, GRC, and AppSec operations[cite: 1, 2, 3].
+            Cybersecurity professional and researcher with hands-on SOC fundamentals - log analysis, threat detection, SIEM, and phishing investigation. ISC2 CC certified; CAISR (Certified AI Security & Risk) certified with applied exposure to AI-assisted cybersecurity matrices. Backed by an M.Tech engineering background, looking to break into entry-level SOC Analyst, Blue Team, GRC, and AppSec operations.
         </p>
         <div class="links-container">
-            <!-- Corrected mailto endpoint string to remove duplicate visual parsing anomalies -->
             <a href="mailto:bhavyanagasai@gmail.com" class="cyber-btn">⚡ CONTACT_EMAIL</a>
             <a href="https://linkedin.com/in/bhavyaparvathi" target="_blank" class="cyber-btn">⚡ LINKEDIN_NET</a>
             <a href="https://github.com/Bhavyacyber" target="_blank" class="cyber-btn">⚡ GITHUB_NODE</a>
         </div>
     </header>
 
-    <!-- CORE TELEMETRY TRACKER GRID -->
     <div class="dashboard-grid">
         
-        <!-- LEFT TERMINAL BLOCK: TIMELINES & LOGS -->
-        <div class="panel cyan-panel">
-            <div class="panel-title">📡 [MODULE_01]: CORE_OPERATIONAL_LOGS</div>
-            
-            <div class="timeline-item">
-                <div class="item-header">
-                    <h3 class="item-title">Cybersecurity Architecture Research Intern</h3>
-                    <span class="item-meta">JUN 2026 - PRESENT</span>
+        <div>
+            <div class="panel cyan-panel">
+                <div class="panel-title">📡 [MODULE_01]: CORE_OPERATIONAL_LOGS</div>
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Cybersecurity Architecture Research Intern</h3>
+                        <span class="item-meta">JUN 2026 - PRESENT</span>
+                    </div>
+                    <div class="item-sub">iTelematics Software Pvt Ltd (EV.ENGINEER™) | Aerospace, Defence, & EV Sectors</div>
+                    <ul>
+                        <li>Contributing to active R&D surrounding battery cybersecurity components, threat modelling schemas, and vulnerability assessments for the Battery Intelligence Platform and Battery Aadhaar frameworks.</li>
+                        <li>Structuring detailed secure software development engineering telemetry blueprints and technical specifications.</li>
+                    </ul>
                 </div>
-                <div class="item-sub">iTelematics Software Pvt Ltd (EV.ENGINEER™) | Aerospace, Defence, & EV Sectors</div>
-                <ul>
-                    <li>Contributing to active R&D surrounding battery cybersecurity components, threat modelling schemas, and vulnerability assessments for the Battery Intelligence Platform and Battery Aadhaar frameworks[cite: 1].</li>
-                    <li>Structuring detailed secure software development engineering telemetry blueprints and technical specifications[cite: 1].</li>
-                </ul>
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <h3 class="item-title">Cybersecurity Intern</h3>
+                        <span class="item-meta">2025 (1 MONTH)</span>
+                    </div>
+                    <div class="item-sub">Redynox | Offensive Research Laboratory</div>
+                    <ul>
+                        <li>Deployed localized OWASP WebGoat sandboxes to thoroughly test SQLi, XSS, and CSRF vectors, compiling strict proofs-of-concept mapped directly to OWASP Top 10 vulnerabilities.</li>
+                        <li>Built isolated multi-node VirtualBox network clusters utilizing Ubuntu and Kali configurations; parsed live traffic packet streams within Wireshark while enforcing firewall rule sets via iptables and UFW mechanisms.</li>
+                        <li>Translated raw machine log captures and indicators into structured, audit-ready compliance analysis documentation ready for administrative stakeholder review.</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="item-header">
-                    <h3 class="item-title">Cybersecurity Intern</h3>
-                    <span class="item-meta">2025 (1 MONTH)</span>
+            <div class="panel amber-panel">
+                <div class="panel-title">🎛️ [MODULE_02]: HOME_LABS_&_INFRASTRUCTURE</div>
+                <p>Detailed network topology drawings, server configurations, and monitoring capabilities deployed locally for threat simulation environments.</p>
+                <div class="placeholder-box">
+                    ⚠️ [STATUS: PENDING_DECRYPTION] // LINKED_NODE: home_lab_schematics.cfg<br>
+                    >> Initializing Active Directory Sandbox, Splunk Enterprise Forwarder nodes, and PFSense firewall deployment documentation... Coming soon.
                 </div>
-                <div class="item-sub">Redynox | Offensive Research Laboratory</div>
-                <ul>
-                    <li>Deployed localized OWASP WebGoat sandboxes to thoroughly test SQLi, XSS, and CSRF vectors, compiling strict proofs-of-concept mapped directly to OWASP Top 10 vulnerabilities[cite: 1, 2].</li>
-                    <li>Built isolated multi-node VirtualBox network clusters utilizing Ubuntu and Kali configurations; parsed live traffic packet streams within Wireshark while enforcing firewall rule sets via iptables and UFW mechanisms[cite: 1, 2].</li>
-                    <li>Translated raw machine log captures and indicators into structured, audit-ready compliance analysis documentation ready for administrative stakeholder review[cite: 2, 3].</li>
-                </ul>
+            </div>
+
+            <div class="panel cyan-panel">
+                <div class="panel-title">🔬 [MODULE_03]: DETAILED_VAPT_WALKTHROUGHS</div>
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <h3 class="item-title">REST API & Web Application Vulnerability Map</h3>
+                        <span class="item-meta">LAB EXPERIMENT</span>
+                    </div>
+                    <ul>
+                        <li>Executed rigorous black-box evaluations across target REST web engines tracking OWASP API Top 10 guidelines.</li>
+                        <li>Identified and reported 5 distinct structural anomalies including BOLA flaws and custom data validation input errors (2 calculated as High Severity metrics under active CVSS frameworks).</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <h3 class="item-title">OWASP Juice Shop Complete Structural Assessment</h3>
+                        <span class="item-meta">SANDBOX EVALUATION</span>
+                    </div>
+                    <ul>
+                        <li>Exploited authentication bypass sequences, IDOR parameters causing horizontal escalation chains, and injected obfuscated payloads defeating client filters to execute DOM XSS.</li>
+                        <li>Compiled formal security testing assessment summaries explaining root vulnerabilities and technical configurations for defense mitigation.</li>
+                    </ul>
+                </div>
+                <div class="placeholder-box" style="margin-top:20px;">
+                    ⚡ [NEXT WRITEUP QUEUED]: Deconstructing Wallarm API Security & Postman Automation Pipelines... Coming soon.
+                </div>
             </div>
         </div>
 
-        <!-- RIGHT TERMINAL BLOCK: ENCRYPTED CREDENTIALS -->
-        <div class="panel">
-            <div class="panel-title">🛡️ [MODULE_02]: CERTIFICATION_MATRIX</div>
-            <ul style="list-style-type: '🚀 '; padding-left: 15px;">
-                <li style="margin-bottom: 15px;"><strong style="color:#fff;">CAISR</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Certified AI Security & Risk (2026)</span></li>
-                <li style="margin-bottom: 15px;"><strong style="color:#fff;">API Security Associate</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Wallarm Protection Engine (2026)</span></li>
-                <li style="margin-bottom: 15px;"><strong style="color:#fff;">DPDPA 2023</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Data Privacy Framework (2026)</span></li>
-                <li style="margin-bottom: 15px;"><strong style="color:#fff;">Certified in Cybersecurity</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">ISC2 Global Credentials (2025)</span></li>
-                <li style="margin-bottom: 15px;"><strong style="color:#fff;">Google Cyber Professional</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Security Analyst Core (2025)</span></li>
-                <li style="margin-bottom: 15px;"><strong style="color:#text-dim;">CEH (Ethical Hacker)</strong><br><span style="font-size:0.8rem; color:var(--text-dim);">EC-Council (In Progress // 2026)</span></li>
-            </ul>
-        </div>
+        <div>
+            <div class="panel">
+                <div class="panel-title">🛡️ [MODULE_04]: CERTIFICATIONS</div>
+                <ul style="list-style-type: '🚀 '; padding-left: 15px;">
+                    <li style="margin-bottom: 15px;"><strong style="color:#fff;">CAISR</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Certified AI Security & Risk (2026)</span></li>
+                    <li style="margin-bottom: 15px;"><strong style="color:#fff;">API Security Associate</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Wallarm Protection Engine (2026)</span></li>
+                    <li style="margin-bottom: 15px;"><strong style="color:#fff;">DPDPA 2023</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Data Privacy Framework (2026)</span></li>
+                    <li style="margin-bottom: 15px;"><strong style="color:#fff;">Certified in Cybersecurity</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">ISC2 Global Credentials (2025)</span></li>
+                    <li style="margin-bottom: 15px;"><strong style="color:#fff;">Google Cyber Professional</strong><br><span style="font-size:0.8rem; color:var(--neon-purple);">Security Analyst Core (2025)</span></li>
+                    <li style="margin-bottom: 15px;"><strong style="color:var(--text-dim);">CEH (Ethical Hacker)</strong><br><span style="font-size:0.8rem; color:var(--text-dim);">EC-Council (In Progress)</span></li>
+                </ul>
+            </div>
 
+            <div class="panel amber-panel">
+                <div class="panel-title">🕹️ [MODULE_05]: GAMIFIED_METRICS</div>
+                <p>Live rankings and metrics across competitive industry capture-the-flag vectors.</p>
+                <div class="placeholder-box" style="border-color: rgba(255,170,0,0.4);">
+                    [📡 CONNECTING TO TRYHACKME API...]<br>
+                    >> Target Node: TryHackMe Badges & Rank Displays<br>
+                    >> Target Node: HackTheBox Profile Verification Matrices<br>
+                    Status: Awaiting profile link synchronization... Coming soon.
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- LOWER MODULE: COMPREHENSIVE ATTACK VECTORS -->
-    <div class="panel green-panel" style="margin-bottom: 30px;">
-        <div class="panel-title">⚔️ [MODULE_03]: TECHNICAL_VECTOR_SKILLS</div>
-        
+    <div class="panel green-panel">
+        <div class="panel-title">⚔️ [MODULE_06]: TECHNICAL_VECTOR_SKILLS</div>
         <div class="skill-matrix-grid">
             <div class="skill-card">
                 <div class="skill-group-title">> SOC OPERATIONS & THREAT TRIAGE</div>
@@ -439,104 +404,15 @@
                     <span class="cyber-tag">Splunk (SIEM)</span><span class="cyber-tag">Log Analysis</span><span class="cyber-tag">Incident Response</span><span class="cyber-tag">Threat Detection</span><span class="cyber-tag">Phishing Investigation</span><span class="cyber-tag">VirusTotal IOCs</span>
                 </div>
             </div>
-
             <div class="skill-card">
                 <div class="skill-group-title">> APPSEC & API PENETRATION TESTING</div>
                 <div class="tags-container">
-                    <span class="cyber-tag">Burp Suite</span><span class="cyber-tag">OWASP ZAP</span><span class="cyber-tag">OWASP Top 10</span><span class="cyber-tag">BOLA Vectors</span><span class="cyber-tag">IDOR</span><span class="cyber-tag">SQLi / XSS / CSRF</span><span class="cyber-tag">CVSS V3 Scoring</span><span class="cyber-tag">Postman Environment</span>
+                    <span class="cyber-tag">Burp Suite</span><span class="cyber-tag">OWASP ZAP</span><span class="cyber-tag">OWASP Top 10</span><span class="cyber-tag">BOLA Vectors</span><span class="cyber-tag">IDOR</span><span class="cyber-tag">SQLi / XSS / CSRF</span>
                 </div>
             </div>
-
-            <div class="skill-card">
-                <div class="skill-group-title">> TRAFFIC DISSECTION & NETWORKING</div>
-                <div class="tags-container">
-                    <span class="cyber-tag">Wireshark Packet Analysis</span><span class="cyber-tag">Nmap Scripting Engine</span><span class="cyber-tag">UFW / iptables Rules</span><span class="cyber-tag">OpenVAS Scanner</span><span class="cyber-tag">Recon-ng</span><span class="cyber-tag">VirtualBox Sandbox</span>
-                </div>
-            </div>
-
-            <div class="skill-card">
-                <div class="skill-group-title">> GRC AUDITING & PRIVACY FRAMEWORKS</div>
-                <div class="tags-container">
-                    <span class="cyber-tag">DPDPA 2023 Compliance</span><span class="cyber-tag">Risk Assessment Metrics</span><span class="cyber-tag">Security Policy Drafting</span><span class="cyber-tag">NIST AI RMF</span><span class="cyber-tag">OWASP LLM Top 10</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FIELD RESEARCH NODE -->
-    <div class="panel cyan-panel" style="margin-bottom: 30px;">
-        <div class="panel-title">🔬 [MODULE_04]: INDEPENDENT_FIELD_RESEARCH</div>
-        
-        <div class="timeline-item">
-            <div class="item-header">
-                <h3 class="item-title">REST API & Web Application Vulnerability Map</h3>
-                <span class="item-meta">LAB EXPERIMENT</span>
-            </div>
-            <ul>
-                <li>Executed rigorous black-box evaluations across target REST web engines tracking OWASP API Top 10 guidelines[cite: 2, 3].</li>
-                <li>Identified and reported 5 distinct structural anomalies including BOLA flaws and custom data validation input errors (2 calculated as High Severity metrics under active CVSS frameworks)[cite: 2, 3].</li>
-            </ul>
-        </div>
-
-        <div class="timeline-item">
-            <div class="item-header">
-                <h3 class="item-title">OWASP Juice Shop Complete Structural Assessment</h3>
-                <span class="item-meta">SANDBOX EVALUATION</span>
-            </div>
-            <ul>
-                <li>Exploited authentication bypass sequences, IDOR parameters causing horizontal escalation chains, and injected obfuscated payloads defeating client filters to execute DOM XSS[cite: 2, 3].</li>
-                <li>Compiled formal security testing assessment summaries explaining root vulnerabilities and technical configurations for defense mitigation[cite: 2, 3].</li>
-            </ul>
-        </div>
-
-        <div class="timeline-item">
-            <div class="item-header">
-                <h3 class="item-title">Network Reconnaissance & Phishing Triage Analysis</h3>
-                <span class="item-meta">THREAT INTEL LOG</span>
-            </div>
-            <ul>
-                <li>Footprinted target test beds discovering 12 active services and mapping out vulnerabilities with open scanners[cite: 1, 2].</li>
-                <li>Dissected suspicious headers within a multi-phishing queue, identifying spoofed domain patterns, DKIM/SPF protection failures, and IOC traces[cite: 1, 2].</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- EDUCATION NODES -->
-    <div class="panel green-panel" style="margin-bottom: 30px;">
-        <div class="panel-title">🎓 [MODULE_05]: ACADEMIC_PROFILES</div>
-        <div class="timeline-item">
-            <div class="item-header">
-                <h3 class="item-title">M.Tech - Structural Engineering</h3>
-                <span class="item-meta">CGPA: 8.67</span>
-            </div>
-            <div class="item-sub">Aditya Engineering College (Autonomous), Kakinada | 2022 - 2024[cite: 1, 2]</div>
-        </div>
-        <div class="timeline-item">
-            <div class="item-header">
-                <h3 class="item-title">B.Tech - Civil Engineering</h3>
-                <span class="item-meta">CGPA: 8.21</span>
-            </div>
-            <div class="item-sub">Aditya Engineering College (Autonomous), Kakinada | 2018 - 2022[cite: 1, 2]</div>
-        </div>
-        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-bright); font-weight: bold;">
-            > SYSTEM NOTICE: Transferred high-level systems engineering optimization analytics directly into cybersecurity defensive vectors[cite: 2, 3]. Independent execution of 5+ technical certifications inside 12 operational months[cite: 1, 2].
-        </p>
-    </div>
-
-    <!-- TECHNICAL INTEL FEED (BLOG) -->
-    <div class="panel" style="border-left-color: var(--neon-cyan);">
-        <div class="panel-title" style="color: var(--neon-cyan);">📰 [MODULE_06]: SECURITY_INTEL_FEED (BLOGS)</div>
-        <div class="blog-card">
-            <div class="blog-date">INTEL REPORT // PERSISTENT THREAT ANALYSIS</div>
-            <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; color: #fff;">Deconstructing Broken Object Level Authorization (BOLA) in Modern APIs</h3>
-            <p style="margin: 0 0 15px 0; font-size: 0.88rem; color: var(--text-normal); line-height: 1.7;">
-                An deep engineering focus dissecting broken user verification arrays running across REST API microservice architectures. Demonstrating how request modifications captured via interception proxy metrics leak unauthorized vertical access privileges...
-            </p>
-            <a href="#" class="blog-link">DECRYPT FULL REPORT →</a>
         </div>
     </div>
 
 </div>
-
 </body>
 </html>
