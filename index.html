@@ -3,6 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhavya Parvathi | Cyber Operations Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #05080c;
+            --panel-bg: rgba(10, 17, 26, 0.75);
+            --neon-green: #00ff66;
+            --neon-cyan: #00f0ff;
+            --neon-purple: #bd00ff;
+            --text-main: #e2e8f0;
+            --text-muted: #64748b;
+            --border-glow: rgba(0, 240, 255, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(18, 24, 38, 0.5) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(18, 24, 38, 0.5) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Scanline animation overlay */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* Animated grid background bar moving down */
+        .scan-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to bottom, transparent, var(--neon-cyan), transparent);
+            opacity: 0.3;
+            animation: scan 6s linear infinite;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes scan {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Cyberpunk HUD Header */
+        header {
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 4px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 15px var(--border-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            border-style: solid;
+            border-width: 0 25px 25px 0;
+            border-color: transparent var(--neon-cyan) transparent transparent;
+        }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-cyan);
+            margin: 0 0 10px 0;
+            letter-spacing: 2px;
+        }
+
+        .header-subtitle {
+            font-size: 1.1rem;
+            color: var(--neon-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .profile-summary {
+            color: #94a3b8;
+            max-width: 800px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .links-container {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .cyber-btn {
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: inset 0 0 0 0 rgba(0, 240, 255, 0.2);
+        }
+
+        .cyber-btn:hover {
+            color: #000;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan);
+            font-weight: bold;
+        }
+
+        /* Grid Layout for Skills and Credentials */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--neon-purple);
+            border-radius: 4px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .panel.cyan-panel {
+            border-left-color: var(--neon-cyan);
+        }
+
+        .panel.green-panel {
+            border-left-color: var(--neon-green);
+        }
+
+        .panel-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel.cyan-panel .panel-title { color: var(--neon-cyan); }
+        .panel.green-panel .panel-title { color: var(--neon-green); }
+        .panel .panel-title { color: var(--neon-purple); }
+
+        /* Skill Clusters */
+        .skill-group {
+            margin-bottom: 20px;
+        }
+        .skill-group-title {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .cyber-tag {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #cbd5e1;
+            padding: 4px 10px;
+            border-radius: 2px;
+            font-size: 0.75rem;
+        }
+        .cyber-tag:hover {
+            border-color: var(--neon-cyan);
+            color: #fff;
+            box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Timeline Items */
+        .timeline-item {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .timeline-item:last-child {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .item-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            color: #fff;
+            margin: 0;
+        }
+        .item-meta {
+            font-size: 0.8rem;
+            color: var(--neon-green);
+        }
+        .item-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 2px 0 10px 0;
+        }
+        ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        li { margin-bottom: 6px; }
+
+        /* Modernized Blog Posts Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .blog-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 4px;
+            position: relative;
+        }
+        .blog-card:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
+            transform: scale(1.01);
+        }
+        .blog-date {
+            font-size: 0.75rem;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="scan-bar"></div>
+
+<div class="container">
+    
+    <!-- HEADER NODE -->
+    <header>
+        <div class="header-title">BHAVYA PARVATHI</div>
+        <div class="header-subtitle">// SEC-OPS ANALYST & CYBERSECURITY RESEARCHER</div>
+        <p class="profile-summary">
+            Cybersecurity professional and researcher with hands-on SOC fundamentals - log analysis, threat detection, SIEM, and phishing investigation[cite: 1]. ISC2 CC certified; CAISR (Certified AI Security & Risk) certified with applied exposure to AI-assisted cybersecurity[cite: 1]. M.Tech background[cite: 1]. Actively exploring SOC Analyst, entry-level Blue Team, GRC, and Penetration Testing matrices[cite: 1, 2, 3].
+        </p>
+        <div class="links-container">
+            <a href="mailto:bhavyanagasai@gmail.com" class="cyber-btn">⚡ EMAIL CONTACT</a>
+            <a href="https://linkedin.com/in/bhavyaparvathi" target="_blank" class="cyber-btn">⚡ LINKEDIN NETWORK</a>
+            <a href="https://github.com/Bhavyacyber" target="_blank" class="cyber-btn">⚡ GITHUB CORE</a>
+        </div>
+    </header>
+
+    <!-- HUB MODULES GRID -->
+    <div class="dashboard-grid">
+        
+        <!-- LEFT PANEL: EXPERIENCE & TIMELINES -->
+        <div class="panel cyan-panel">
+            <div class="panel-title">📡 [MODULE_01]: OPERATIONAL_LOGS</div>
+            
+            <div class="timeline-item">
+                <div class="item-header">
+                    <h3 class="item-title">Cybersecurity Architecture Research Intern</h3>
+                    <span class="item-meta">JUN 2026 - PRESENT</span>
+                </div>
+                <div class="item-sub">iTelematics Software Pvt Ltd (EV.ENGINEER™) | Aerospace/Defence/EV Applications</div>
+                <ul>
+                    <li>Contributing to R&D on battery cybersecurity, threat modelling, and risk assessment for the Battery Intelligence Platform and Battery Aadhaar System[cite: 1].</li>
+                    <li>Supporting AI-assisted cybersecurity and secure software development via comprehensive technical documentation[cite: 1].</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="item-header">
+                    <h3 class="item-title">Cybersecurity Intern</h3>
+                    <span class="item-meta">2025 (1 MONTH)</span>
+                </div>
+                <div class="item-sub">Redynox | VAPT Lab Environment</div>
+                <ul>
+                    <li>Tested OWASP WebGoat for SQLi, XSS, and CSRF vulnerabilities; documented findings with detailed proof-of-concept steps mapped directly to OWASP Top 10 guidelines[cite: 1, 2].</li>
+                    <li>Engineered an isolated VirtualBox network sandbox (Ubuntu + Kali), analyzed real-time traffic captures within Wireshark, and deployed explicit custom firewall configuration tables[cite: 1, 2].</li>
+                    <li>Delivered clean, audit-ready technical evaluation reports mapping out complex root-cause indicators and remediation measures[cite: 2, 3].</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: CREDENTIALS MATRIX -->
+        <div class="panel">
+            <div class="panel-title">🛡️ [MODULE_02]: ENCRYPTED_CREDENTIALS</div>
+            <ul style="list-style-type: '⚡ '; padding-left: 15px;">
+                <li style="margin-bottom: 12px;"><strong style="color:#fff;">CAISR</strong><br><span style="font-size:0.8rem; color:var(--neon-cyan);">Certified AI Security & Risk | 2026</span></li>
+                <li style="margin-bottom: 12px;"><strong style="color:#fff;">API Security Associate</strong><br><span style="font-size:0.8rem; color:var(--neon-cyan);">Wallarm Methodology | 2026</span></li>
+                <li style="margin-bottom: 12px;"><strong style="color:#fff;">DPDPA 2023</strong><br><span style="font-size:0.8rem; color:var(--neon-cyan);">Privacy Framework Certificate | 2026</span></li>
+                <li style="margin-bottom: 12px;"><strong style="color:#fff;">Certified in Cybersecurity (CC)</strong><br><span style="font-size:0.8rem; color:var(--neon-cyan);">ISC2 Global Validation | 2025</span></li>
+                <li style="margin-bottom: 12px;"><strong style="color:#fff;">Google Cyber Professional</strong><br><span style="font-size:0.8rem; color:var(--neon-cyan);">Coursera Specialization | 2025</span></li>
+                <li style="margin-bottom: 12px;"><strong style="color:#fff;">CEH (Ethical Hacker)</strong><br><span style="font-size:0.8rem; color:var(--text-muted);">In Progress / Target 2026</span></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- LOWER MODULE ROW: SKILLS -->
+    <div class="panel green-panel" style="margin-bottom: 30px;">
+        <div class="panel-title">⚔️ [MODULE_03]: ATTACK_DEFENSE_VECTORS</div>
+        
+        <div class="skill-group">
+            <div class="skill-group-title">> SOC OPERATIONS & THREAT HUNTING</div>
+            <div class="tags-container">
+                <span class="cyber-tag">Splunk (SIEM)</span><span class="cyber-tag">Log Analysis</span><span class="cyber-tag">Incident Response</span><span class="cyber-tag">Threat Detection</span><span class="cyber-tag">Phishing Triage</span><span class="cyber-tag">VirusTotal IOCs</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <div class="skill-group-title">> OFFENSIVE APPS & API PENETRATION TESTING</div>
+            <div class="tags-container">
+                <span class="cyber-tag">Burp Suite Professional</span><span class="cyber-tag">OWASP ZAP</span><span class="cyber-tag">BOLA Exploitation</span><span class="cyber-tag">IDOR Vector Maps</span><span class="cyber-tag">SQL Injection</span><span class="cyber-tag">XSS paylods</span><span class="cyber-tag">CVSS Scoring V3</span><span class="cyber-tag">Postman Engine</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <div class="skill-group-title">> NETWORKING Sandbox & TRAFFIC ANALYSIS</div>
+            <div class="tags-container">
+                <span class="cyber-tag">Wireshark Packet Dissection</span><span class="cyber-tag">Nmap Scripting Engine (NSE)</span><span class="cyber-tag">UFW & iptables Firewalls</span><span class="cyber-tag">OpenVAS Vulnerability Scanning</span><span class="cyber-tag">Recon-ng</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <div class="skill-group-title">> GRC COMPLIANCE & PRIVACY SCHEMES</div>
+            <div class="tags-container">
+                <span class="cyber-tag">DPDPA 2023 Regulation</span><span class="cyber-tag">Risk Assessment Metrics</span><span class="cyber-tag">Security Policy Drafting</span><span class="cyber-tag">NIST AI RMF Guidance</span><span class="cyber-tag">OWASP LLM Top 10</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- INDEPENDENT RESEARCH / FIELD AGENT REPORTS -->
+    <div class="panel cyan-panel" style="margin-bottom: 30px;">
+        <div class="panel-title">🔬 [MODULE_04]: INDEPENDENT_RESEARCH_REPORTS</div>
+        <div class="timeline-item">
+            <div class="item-header">
+                <h3 class="item-title">REST API & Web Application Penetration Testing Matrix</h3>
+                <span class="item-meta">TARGET EVALUATION</span>
+            </div>
+            <ul>
+                <li>Executed comprehensive, structured black-box assessments on target endpoints using OWASP API Top 10 methods[cite: 2, 3].</li>
+                <li>Isolated and confirmed 5 flaws—including BOLA, improper authorization, and severe input processing mechanics (2 marked High severity under CVSS scoring metrics)[cite: 2, 3].</li>
+            </ul>
+        </div>
+        <div class="timeline-item">
+            <div class="item-header">
+                <h3 class="item-title">OWASP Juice Shop Sandbox Deployment</h3>
+                <span class="item-meta">VULNERABILITY RESEARCH</span>
+            </div>
+            <ul>
+                <li>Successfully bypassed authentication matrices, executed IDOR horizontal privilege exploitation, and deployed malicious JavaScript vectors to trigger DOM and filter-evasion XSS vulnerabilities[cite: 2, 3].</li>
+                <li>Compiled deep technical VAPT evaluation breakdowns showcasing core architectural fixes[cite: 2, 3].</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- INTEL FEED (BLOGS) -->
+    <div class="panel" style="border-left-color: var(--neon-cyan);">
+        <div class="panel-title" style="color: var(--neon-cyan);">📰 [MODULE_05]: THREAT_INTEL_FEED (BLOGS)</div>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-date">INTEL BRIEF // JULY 2026</div>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #fff;">Deconstructing Broken Object Level Authorization (BOLA)</h3>
+                <p style="margin: 0 0 15px 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.6;">
+                    An operational perspective analyzing how broken access validation logic across distributed REST API structures creates immediate threats. Leveraging Burp Suite instrumentation to isolate token manipulation paths...
+                </p>
+                <a href="#" style="color: var(--neon-cyan); font-size: 0.8rem; text-decoration: none; font-weight: bold; letter-spacing: 1px;">ACCESS ENTIRE REPORT →</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhavya Parvathi | Cyber Security Terminal</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
